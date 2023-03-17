@@ -1,10 +1,10 @@
 #base {
     background-color: darkslateblue;
     border: solid white 5px;
-    height: 500px;
+    height: 400px;
     width: 500px;
-    margin: 5% auto;
-    border-radius: 190px;
+    margin: auto;
+    border-radius: 120px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -34,7 +34,7 @@
     color: white;
     font-size: 200%;
     font-weight: bolder;
-    margin: auto auto 10px auto;
+    margin: 35px auto auto auto;
     border-radius: 10px;
     border: solid white 5px;
     height: 90px;
@@ -50,7 +50,7 @@
     margin: auto;
     border-radius: 10px;
     border: solid white 5px;
-    height: 70px;
+    height: 55px;
     width: 120px;
 }
 

@@ -3,7 +3,7 @@
     border: solid white 5px;
     height: 500px;
     width: 500px;
-    margin: 5% auto;
+    margin: 20px auto 10px auto;
     border-radius: 190px;
     display: flex;
     align-items: center;
@@ -43,19 +43,41 @@
     border-radius: 0 0 190px 0;
 }
 
-#btn_home {
+
+#buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#btn_home,
+#btn_restart {
     background-color: plum;
     color: white;
     font-size: 120%;
     font-weight: bolder;
-    margin: auto;
     border-radius: 10px;
-    border: solid white 5px;
+    border: solid white 4px;
     height: 70px;
     width: 120px;
+    margin: 5px;
 }
 
-#btn_home:hover {
+#btn_home:hover,
+#btn_restart:hover {
     background-color: palevioletred;
     cursor: pointer;
+}
+
+#score {
+    color: aliceblue;
+    border: whitesmoke solid 2px;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: darkslategray;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 180%;
+    margin-left: 45%;
 }

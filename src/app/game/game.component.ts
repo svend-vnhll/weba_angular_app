@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { GameService } from '../game.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-game',
@@ -11,56 +13,148 @@ export class GameComponent {
   red_btn: string = "";
   blue_btn: string = "";
   green_btn: string = "";
+  inGame: boolean = false;
+  score: number = 0;
+  step?: number;
 
-  constructor(private router: Router) { };
+  constructor(private router: Router,
+    private gameService: GameService,
+    private messageService: MessageService) { };
 
-  code: number[] = [1, 2, 3, 4];
+  code: number[] = [];
 
   ngOnInit(): void {
-    this.readCode();
+    this.gameService.game = [];
+    this.code = [];
+    this.step = 1;
+    this.score = 0;
+    this.newRound();
+    console.log(this.gameService.game);
   }
 
   async readCode() {
     for (const pos of this.code) {
       await new Promise(resolve => setTimeout(resolve, 1000));
       if (pos == 1) {
-        this.ybtn();
+        this.ybtn(true);
       } else if (pos == 2) {
-        this.bbtn();
+        this.bbtn(true);
       } else if (pos == 3) {
-        this.rbtn();
+        this.rbtn(true);
       } else {
-        this.gbtn();
+        this.gbtn(true);
+      }
+    }
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    this.inGame = true;
+    this.messageService.set("Your turn !");
+  }
+
+  newRound() {
+    this.inGame = false;
+    this.gameService.newRound();
+    this.code = this.gameService.game;
+    this.readCode();
+    this.step = 1;
+  }
+
+  ybtn(computer?: boolean) {
+    if (this.inGame || computer) {
+      const div_ybtn = document.getElementById('yellow_btn')!;
+      //const ybtn_color = window.getComputedStyle(div_ybtn).getPropertyValue('background-color');
+      setTimeout(function () { div_ybtn.style.backgroundColor = "rgb(189, 183, 107)" }, 300);
+      div_ybtn.style.backgroundColor = "yellow";
+      if (this.inGame) {
+        if (this.checkIfOK(1, this.step!)) {
+          this.score = this.score + 1;
+          if (this.checkIfEndRound(this.step!)) {
+            console.log("WIN !");
+            this.newRound();
+          }
+        } else {
+          console.log("GAME OVER");
+        }
       }
     }
   }
 
-  ybtn() {
-    const div_ybtn = document.getElementById('yellow_btn')!;
-    const ybtn_color = window.getComputedStyle(div_ybtn).getPropertyValue('background-color');
-    setTimeout(function () { div_ybtn.style.backgroundColor = ybtn_color }, 300);
-    div_ybtn.style.backgroundColor = "yellow";
+  bbtn(computer?: boolean) {
+    if (this.inGame || computer) {
+      const div_bbtn = document.getElementById('blue_btn')!;
+      setTimeout(function () { div_bbtn.style.backgroundColor = "rgb(0, 0, 139)" }, 300);
+      div_bbtn.style.backgroundColor = "blue";
+      if (this.inGame) {
+        if (this.checkIfOK(2, this.step!)) {
+          this.score = this.score + 1;
+          if (this.checkIfEndRound(this.step!)) {
+            console.log("WIN !");
+            this.newRound();
+          }
+        } else {
+          console.log("GAME OVER");
+        }
+      }
+    }
   }
 
-  bbtn() {
-    const div_bbtn = document.getElementById('blue_btn')!;
-    const bbtn_color = window.getComputedStyle(div_bbtn).getPropertyValue('background-color');
-    setTimeout(function () { div_bbtn.style.backgroundColor = bbtn_color }, 300);
-    div_bbtn.style.backgroundColor = "blue";
+  rbtn(computer?: boolean) {
+    if (this.inGame || computer) {
+      const div_rbtn = document.getElementById('red_btn')!;
+      setTimeout(function () { div_rbtn.style.backgroundColor = "rgb(139, 0, 0)" }, 300);
+      div_rbtn.style.backgroundColor = "red";
+      if (this.inGame) {
+        if (this.checkIfOK(3, this.step!)) {
+          this.score = this.score + 1;
+          if (this.checkIfEndRound(this.step!)) {
+            console.log("WIN !");
+            this.newRound();
+          }
+        } else {
+          console.log("GAME OVER");
+        }
+      }
+    }
   }
 
-  rbtn() {
-    const div_rbtn = document.getElementById('red_btn')!;
-    const rbtn_color = window.getComputedStyle(div_rbtn).getPropertyValue('background-color');
-    setTimeout(function () { div_rbtn.style.backgroundColor = rbtn_color }, 300);
-    div_rbtn.style.backgroundColor = "red";
+  gbtn(computer?: boolean) {
+    if (this.inGame || computer) {
+      const div_gbtn = document.getElementById('green_btn')!;
+      setTimeout(function () { div_gbtn.style.backgroundColor = "rgb(143, 188, 143)" }, 300);
+      div_gbtn.style.backgroundColor = "greenyellow";
+      if (this.inGame) {
+        if (this.checkIfOK(4, this.step!)) {
+          this.score = this.score + 1;
+          if (this.checkIfEndRound(this.step!)) {
+            console.log("WIN !");
+            this.newRound();
+          }
+        } else {
+          console.log("GAME OVER");
+        }
+      }
+    }
   }
 
-  gbtn() {
-    const div_gbtn = document.getElementById('green_btn')!;
-    const gbtn_color = window.getComputedStyle(div_gbtn).getPropertyValue('background-color');
-    setTimeout(function () { div_gbtn.style.backgroundColor = gbtn_color }, 300);
-    div_gbtn.style.backgroundColor = "greenyellow";
+  checkIfOK(btn: number, step: number): boolean {
+    if (btn == this.code.slice(step - 1, step)[0]) {
+      this.step = +this.step! + 1;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkIfEndRound(step: number): boolean {
+    if (step - 1 == this.code.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  async restart() {
+    this.ngOnInit();
+    this.messageService.set("Game restarted !");
   }
 
   backHome() {

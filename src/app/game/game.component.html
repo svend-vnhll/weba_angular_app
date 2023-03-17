@@ -1,3 +1,5 @@
+<app-message></app-message>
+<span id="score">Score : {{ score }}</span>
 <div id="base">
     <div id="upper_btns">
         <div class="simon_btn" id="yellow_btn" (click)="ybtn()"></div><br><br>
@@ -9,4 +11,7 @@
     </div>
 </div>
 
-<button id="btn_home" (click)="backHome()">Home</button>
+<div id="buttons">
+    <button id="btn_home" (click)="backHome()">HOME</button>
+    <button id="btn_restart" (click)="restart()">RESTART</button>
+</div>
