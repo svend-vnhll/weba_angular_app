@@ -1,0 +1,66 @@
+#base {
+    background-color: darkslateblue;
+    border: solid white 5px;
+    height: 500px;
+    width: 500px;
+    margin: 5% auto;
+    border-radius: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+#start_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#text_input {
+    background-color: lightblue;
+    color: white;
+    font-size: 200%;
+    font-weight: bolder;
+    margin: auto;
+    border-radius: 10px;
+    border: solid white 5px;
+    text-align: center;
+}
+
+#start {
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 200%;
+    font-weight: bolder;
+    margin: auto auto 10px auto;
+    border-radius: 10px;
+    border: solid white 5px;
+    height: 90px;
+    width: 120px;
+
+}
+
+#btn_dashboard {
+    background-color: plum;
+    color: white;
+    font-size: 120%;
+    font-weight: bolder;
+    margin: auto;
+    border-radius: 10px;
+    border: solid white 5px;
+    height: 70px;
+    width: 120px;
+}
+
+
+#start:hover {
+    background-color: darkcyan;
+    cursor: pointer;
+}
+
+#btn_dashboard:hover {
+    background-color: palevioletred;
+    cursor: pointer;
+}

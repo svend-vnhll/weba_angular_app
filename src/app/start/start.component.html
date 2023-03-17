@@ -1,0 +1,11 @@
+<div id="base">
+    <app-message></app-message>
+    <div id="start_section">
+        <button (click)="start_game()" id="start">START</button><br><br>
+        <input id="text_input" type="text" placeholder="Player name" [(ngModel)]="userInput" />
+    </div>
+    <button id="btn_dashboard" type="button" (click)="openDashboard()">Top players</button>
+</div>
+<div *ngIf="dashboard_shown">
+    <app-dashboard></app-dashboard>
+</div>
