@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from '../message.service';
+import { PlayerService } from '../player.service';
+import { Player } from '../player';
 
 
 @Component({
@@ -14,17 +16,28 @@ export class StartComponent {
 
   dashboard_shown?: boolean;
 
-  constructor(private messageService: MessageService, private router: Router) { };
+  constructor(private messageService: MessageService, private router: Router, private playerService: PlayerService) { };
 
   start_game() {
     if (this.userInput == "") {
       setTimeout(() => this.messageService.set("Let's play !"), 1000);
       this.messageService.set("Enter your player name !");
     } else {
-      alert("The game starts, " + this.userInput + " !");
+
+      this.addPlayer(this.userInput);
       this.userInput = "";
       this.router.navigate(['/game']);
     }
+  }
+
+  addPlayer(nickname: string) {
+    const newPlayer: Player = {
+      id: 0,
+      nickname: nickname,
+      bestscore: 0,
+      count_games: 0
+    };
+    this.playerService.addPlayer(newPlayer);
   }
 
   openDashboard() {

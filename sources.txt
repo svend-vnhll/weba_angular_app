@@ -21,4 +21,5 @@ Add delay
 Visuel structure Angular 
 > https://didaquest.org/w/images/8/8d/Carte_Conceptuelle_%28Angular%29_Gdoura_Mohamed%282%29.jpg
 
-
+Check if object is undefined 
+> https://stackoverflow.com/questions/43716263/how-to-check-undefined-in-typescript

@@ -4,7 +4,7 @@
     height: 500px;
     width: 500px;
     margin: 20px auto 10px auto;
-    border-radius: 190px;
+    border-radius: 170px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -59,7 +59,7 @@
     font-weight: bolder;
     border-radius: 10px;
     border: solid white 4px;
-    height: 70px;
+    height: 35;
     width: 120px;
     margin: 5px;
 }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from '../game.service';
 import { MessageService } from '../message.service';
+import { PlayerService } from '../player.service';
+import { Player } from '../player';
 
 @Component({
   selector: 'app-game',
@@ -16,20 +18,26 @@ export class GameComponent {
   inGame: boolean = false;
   score: number = 0;
   step?: number;
+  player?: Player | undefined;
 
   constructor(private router: Router,
     private gameService: GameService,
-    private messageService: MessageService) { };
+    private messageService: MessageService,
+    private playerService: PlayerService) { };
 
   code: number[] = [];
 
   ngOnInit(): void {
-    this.gameService.game = [];
-    this.code = [];
-    this.step = 1;
-    this.score = 0;
-    this.newRound();
-    console.log(this.gameService.game);
+    this.player = this.playerService.logged;
+    if (this.player === undefined) {
+      this.router.navigate(['/start']);
+    } else {
+      this.gameService.game = [];
+      this.code = [];
+      this.step = 1;
+      this.score = 0;
+      this.newRound();
+    }
   }
 
   async readCode() {
@@ -47,7 +55,7 @@ export class GameComponent {
     }
     await new Promise(resolve => setTimeout(resolve, 1000));
     this.inGame = true;
-    this.messageService.set("Your turn !");
+    this.messageService.set("Your turn, " + this.player?.nickname + " !");
   }
 
   newRound() {
@@ -56,9 +64,10 @@ export class GameComponent {
     this.code = this.gameService.game;
     this.readCode();
     this.step = 1;
+    this.messageService.set("Watch the colors !");
   }
 
-  ybtn(computer?: boolean) {
+  async ybtn(computer?: boolean) {
     if (this.inGame || computer) {
       const div_ybtn = document.getElementById('yellow_btn')!;
       //const ybtn_color = window.getComputedStyle(div_ybtn).getPropertyValue('background-color');
@@ -66,9 +75,10 @@ export class GameComponent {
       div_ybtn.style.backgroundColor = "yellow";
       if (this.inGame) {
         if (this.checkIfOK(1, this.step!)) {
-          this.score = this.score + 1;
           if (this.checkIfEndRound(this.step!)) {
-            console.log("WIN !");
+            this.messageService.set("Good !");
+            this.score = this.score + 1;
+            await new Promise(resolve => setTimeout(resolve, 1000));
             this.newRound();
           }
         } else {
@@ -78,16 +88,17 @@ export class GameComponent {
     }
   }
 
-  bbtn(computer?: boolean) {
+  async bbtn(computer?: boolean) {
     if (this.inGame || computer) {
       const div_bbtn = document.getElementById('blue_btn')!;
       setTimeout(function () { div_bbtn.style.backgroundColor = "rgb(0, 0, 139)" }, 300);
       div_bbtn.style.backgroundColor = "blue";
       if (this.inGame) {
         if (this.checkIfOK(2, this.step!)) {
-          this.score = this.score + 1;
           if (this.checkIfEndRound(this.step!)) {
-            console.log("WIN !");
+            this.messageService.set("Great !");
+            this.score = this.score + 1;
+            await new Promise(resolve => setTimeout(resolve, 1000));
             this.newRound();
           }
         } else {
@@ -97,16 +108,17 @@ export class GameComponent {
     }
   }
 
-  rbtn(computer?: boolean) {
+  async rbtn(computer?: boolean) {
     if (this.inGame || computer) {
       const div_rbtn = document.getElementById('red_btn')!;
       setTimeout(function () { div_rbtn.style.backgroundColor = "rgb(139, 0, 0)" }, 300);
       div_rbtn.style.backgroundColor = "red";
       if (this.inGame) {
         if (this.checkIfOK(3, this.step!)) {
-          this.score = this.score + 1;
           if (this.checkIfEndRound(this.step!)) {
-            console.log("WIN !");
+            this.messageService.set("You got it !");
+            this.score = this.score + 1;
+            await new Promise(resolve => setTimeout(resolve, 1000));
             this.newRound();
           }
         } else {
@@ -116,16 +128,17 @@ export class GameComponent {
     }
   }
 
-  gbtn(computer?: boolean) {
+  async gbtn(computer?: boolean) {
     if (this.inGame || computer) {
       const div_gbtn = document.getElementById('green_btn')!;
       setTimeout(function () { div_gbtn.style.backgroundColor = "rgb(143, 188, 143)" }, 300);
       div_gbtn.style.backgroundColor = "greenyellow";
       if (this.inGame) {
         if (this.checkIfOK(4, this.step!)) {
-          this.score = this.score + 1;
           if (this.checkIfEndRound(this.step!)) {
-            console.log("WIN !");
+            this.messageService.set("Amazing !");
+            this.score = this.score + 1;
+            await new Promise(resolve => setTimeout(resolve, 1000));
             this.newRound();
           }
         } else {
