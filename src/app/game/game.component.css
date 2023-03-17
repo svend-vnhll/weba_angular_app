@@ -1,0 +1,61 @@
+#base {
+    background-color: darkslateblue;
+    border: solid white 5px;
+    height: 500px;
+    width: 500px;
+    margin: 5% auto;
+    border-radius: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.simon_btn {
+    position: relative;
+    border: solid dimgray 10px;
+    height: 180px;
+    width: 180px;
+}
+
+.simon_btn:hover {
+    border-color: gray;
+    cursor: pointer;
+}
+
+#yellow_btn {
+    background-color: darkkhaki;
+    border-radius: 190px 0 0 0;
+}
+
+#blue_btn {
+    background-color: darkblue;
+    border-radius: 0 190px 0 0;
+}
+
+#red_btn {
+    background-color: darkred;
+    border-radius: 0 0 0 190px;
+}
+
+#green_btn {
+    background-color: darkseagreen;
+    border-radius: 0 0 190px 0;
+}
+
+#btn_home {
+    background-color: plum;
+    color: white;
+    font-size: 120%;
+    font-weight: bolder;
+    margin: auto;
+    border-radius: 10px;
+    border: solid white 5px;
+    height: 70px;
+    width: 120px;
+}
+
+#btn_home:hover {
+    background-color: palevioletred;
+    cursor: pointer;
+}
