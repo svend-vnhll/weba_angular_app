@@ -1,0 +1,24 @@
+
+Angular basic guides
+> https://angular.io/guide/what-is-angular
+> https://angular.io/guide/understanding-angular-overview
+
+Angular tutorial 
+> https://angular.io/tutorial/tour-of-heroes
+
+Angular deploiement
+> https://angular.io/start/start-deployment
+
+Video guide pour déploiement 
+> https://www.youtube.com/watch?v=0Gvx7skQTrU
+
+Création .htaccess
+> https://ngmilk.rocks/2015/03/09/angularjs-html5-mode-or-pretty-urls-on-apache-using-htaccess/
+
+Add delay
+> https://stackoverflow.com/questions/37764665/how-to-implement-sleep-function-in-typescript
+
+Visuel structure Angular 
+> https://didaquest.org/w/images/8/8d/Carte_Conceptuelle_%28Angular%29_Gdoura_Mohamed%282%29.jpg
+
+
