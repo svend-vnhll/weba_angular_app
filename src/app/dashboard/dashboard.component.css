@@ -1,0 +1,29 @@
+#players_dashboard {
+    background-color: yellowgreen;
+    border: solid white 5px;
+    height: 150px;
+    width: 500px;
+    margin: 5% auto;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.player {
+    color: white;
+    font-size: 130%;
+    font-weight: bolder;
+    text-align: left;
+    margin-left: 20px;
+}
+
+#dash_title {
+    margin: 40px auto 0 auto;
+    color: white;
+    font-size: 130%;
+    font-weight: bolder;
+    text-align: center;
+    margin-left: 20px;
+}

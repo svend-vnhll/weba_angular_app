@@ -1,0 +1,6 @@
+<h2 id="dash_title">Top Players</h2>
+<div id="players_dashboard">
+    <span class="player" *ngFor="let p of sortedPlayers">
+        Score : {{ p.bestscore }} | {{ p.nickname }} | Played : {{ p.count_games }} times
+    </span>
+</div>
