@@ -9,6 +9,7 @@ export class GameService {
 
   game: number[] = [];
   num?: number;
+  score?: number;
   codeLength?: number = 0;
 
   newRound() {

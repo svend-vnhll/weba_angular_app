@@ -16,9 +16,10 @@ export class GameComponent {
   blue_btn: string = "";
   green_btn: string = "";
   inGame: boolean = false;
+  gameOver: boolean = false;
   score: number = 0;
   step?: number;
-  player?: Player | undefined;
+  player!: Player | undefined;
 
   constructor(private router: Router,
     private gameService: GameService,
@@ -37,12 +38,14 @@ export class GameComponent {
       this.step = 1;
       this.score = 0;
       this.newRound();
+      this.gameOver = false;
     }
+    this.playerService
   }
 
   async readCode() {
     for (const pos of this.code) {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 700));
       if (pos == 1) {
         this.ybtn(true);
       } else if (pos == 2) {
@@ -82,7 +85,7 @@ export class GameComponent {
             this.newRound();
           }
         } else {
-          console.log("GAME OVER");
+          this.endGame();
         }
       }
     }
@@ -102,7 +105,7 @@ export class GameComponent {
             this.newRound();
           }
         } else {
-          console.log("GAME OVER");
+          this.endGame();
         }
       }
     }
@@ -122,7 +125,7 @@ export class GameComponent {
             this.newRound();
           }
         } else {
-          console.log("GAME OVER");
+          this.endGame();
         }
       }
     }
@@ -142,7 +145,7 @@ export class GameComponent {
             this.newRound();
           }
         } else {
-          console.log("GAME OVER");
+          this.endGame();
         }
       }
     }
@@ -165,7 +168,21 @@ export class GameComponent {
     }
   }
 
-  async restart() {
+  endGame() {
+    this.messageService.set("GAME OVER !");
+    if (this.player!.bestscore < this.score) {
+      this.player!.bestscore = this.score;
+    }
+    this.player!.count_games = +this.player!.count_games + 1;
+    this.inGame = false;
+    this.gameOver = true;
+    this.gameService.score = this.score;
+  }
+
+  restart() {
+    if (this.score >= 1) {
+      this.player!.count_games = +this.player!.count_games + 1;
+    }
     this.ngOnInit();
     this.messageService.set("Game restarted !");
   }

@@ -44,6 +44,7 @@ export class StartComponent {
     if (this.dashboard_shown) {
       this.dashboard_shown = false;
     } else {
+      this.playerService.getPlayers;
       this.dashboard_shown = true;
     }
   }

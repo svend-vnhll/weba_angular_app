@@ -15,3 +15,7 @@
     <button id="btn_home" (click)="backHome()">HOME</button>
     <button id="btn_restart" (click)="restart()">RESTART</button>
 </div>
+
+<div *ngIf="gameOver">
+    <app-gameover></app-gameover>
+</div>

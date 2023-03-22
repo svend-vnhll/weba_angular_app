@@ -1,0 +1,15 @@
+#gameover_message {
+    color: orange;
+}
+
+h5 {
+    color: yellow;
+}
+
+div {
+    background-color: darkblue;
+    width: 200px;
+    margin: auto;
+    text-align: center;
+    border: solid 3px white;
+}
